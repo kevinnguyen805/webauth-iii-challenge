@@ -15,7 +15,7 @@ function find(){
 //TODO - make sure to include the role information
 function findBy(filter){
      return db('users')
-     .where('department', '=', filter)
+     .where('username', '=', filter)
      .first()
 }
 

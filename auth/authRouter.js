@@ -5,15 +5,15 @@ const bcrypt = require('bcryptjs')
 const Users = require('../users/usersModel.js')
 const authRegistration = require('../users/usersHelper.js')
 
-//* POST - /auth/register */
-// TODO: VALIDATE REGISTERING CREDENTIALS
+//* POST - /auth/register  ==> returns obj with ID, username, password, department */
+// TODO: VALIDATE REGISTERING CREDENTIALS 
 router.post('/register', (req,res) => {
      const newUser = req.body;
 
      const validateUser = authRegistration(newUser)
 
      if(validateUser.isSuccessful === true){
-          const hash = bcrypt.hash(newUser.password,12)
+          const hash = bcrypt.hashSync(newUser.password,12)
           newUser.password = hash
 
           Users.add(newUser)
@@ -38,7 +38,7 @@ router.post('/register', (req,res) => {
 router.post('/login', (req,res) => {
      let { username, password } = req.body;
 
-     if(username && password){
+     
           Users
           .findBy(username)
           .then(response => {
@@ -51,7 +51,7 @@ router.post('/login', (req,res) => {
                     })
                }
           })
-     }
+     
 })
 
 function getJwtToken(username){

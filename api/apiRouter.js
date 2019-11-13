@@ -3,10 +3,10 @@ const router = express.Router();
 const authRouter = require('../auth/authRouter.js')
 const usersRouter = require('../users/usersRouter.js')
 
-server.use('/auth', authRouter)
-server.use('/users', usersRouter)
+router.use('/auth', authRouter)
+router.use('/users', usersRouter)
 
-server.get('/', (req,res) => {
+router.get('/', (req,res) => {
      res.send('Hello! You are at the root of /api router')
 })
 
