@@ -16,6 +16,7 @@ function find(){
 function findBy(filter){
      return db('users')
      .where('department', '=', filter)
+     .first()
 }
 
 //TODO - remember to add first() when looking for ID so you can take obj out of array
