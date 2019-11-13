@@ -10,7 +10,6 @@ const Users = require('../users/usersModel.js')
 router.post('/register', (req,res) => {
      const newUser = req.body;
 
-     const validateU
 
 })
 
