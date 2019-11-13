@@ -25,7 +25,7 @@ module.exports = router;
 //TODO: ANOTHER AUTHENTICATION MIDDLEWARE FOR DEPARTMENT
 function checkDepartment(department){
      return function(req, res, next){
-          if(department.includes(req.decodedJwt.department)){
+          if(department === req.decodedJwt.department){
                next();
           } else {
                res.status(403).json({message: "Sorry! You do not have the right department/credentials"})

@@ -59,7 +59,7 @@ function getJwtToken(username){
           username,
           department: 'full stack web development'
      }
-     const secret = process.env.JWT_SECRET || 'is it secret? is it safe?';
+     const secret = process.env.JWT_SECRET || 'hello my name is kevin'
      const options = {
           expiresIn:'1d'
      }
