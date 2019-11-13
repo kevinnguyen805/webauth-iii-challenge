@@ -3,12 +3,32 @@ const router = express.Router();
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const Users = require('../users/usersModel.js')
-
+const authRegistration = require('../users/usersHelper.js')
 
 //* POST - /auth/register */
 // TODO: VALIDATE REGISTERING CREDENTIALS
 router.post('/register', (req,res) => {
      const newUser = req.body;
+
+     const validateUser = authRegistration(newUser)
+
+     if(validateUser.isSuccessful === true){
+          const hash = bcrypt.hash(newUser.password,12)
+          newUser.password = hash
+
+          Users.add(newUser)
+          .then(response => {
+               res.status(201).json(response)
+          })
+          .catch(error => {
+               res.status(500).json(error)
+          })
+     } else {
+          res.status(500).json({
+               message: "Invalid credentials",
+               error: validateUser.errors
+          })
+     }
 
 
 })

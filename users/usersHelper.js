@@ -1,4 +1,4 @@
-module.exports = { validateUser }
+module.exports = validateUser;
 
 // TODO: VALIDATE REGISTERING CREDENTIALS
 function validateUser(user){
