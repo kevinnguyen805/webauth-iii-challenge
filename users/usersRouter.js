@@ -22,7 +22,7 @@ module.exports = router;
 
 
 
-//TODO: ANOTHER AUTHENTICATION MIDDLEWARE FOR ROLES
+//TODO: ANOTHER AUTHENTICATION MIDDLEWARE FOR DEPARTMENT
 function checkDepartment(department){
      return function(req, res, next){
           if(department.includes(req.decodedJwt.department)){
