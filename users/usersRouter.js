@@ -4,8 +4,9 @@ const authMiddleware = require('../auth/authMiddleware.js');
 const Users = require('./usersModel.js')
 
 
-//* POST - /users */
+//* GET - /users */
 // TODO: VALIDATE JWT (SECRET) TO GET TO ENDPOINT
+// test by using HEADERS not AUTHENTICATION
 router.get('/', authMiddleware, checkDepartment('full stack web development'), (req,res) => {
      Users.find()
      .then(response => {
@@ -15,6 +16,20 @@ router.get('/', authMiddleware, checkDepartment('full stack web development'), (
           res.status(500).json({message: "Unable to retrieve all users"})
      })
 })
+
+
+router.post('/', (req,res) => {
+     const { department } = req.body
+
+     Users.findByDepartment(department)
+     .then(response => {
+          res.status(200).json(response)
+     })
+     .catch(error => {
+          res.status(500).json({message: "Unable to find users in department"})
+     })
+})
+
 
 module.exports = router;
 

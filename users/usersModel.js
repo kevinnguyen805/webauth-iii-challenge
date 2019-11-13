@@ -4,12 +4,13 @@ module.exports = {
      add,
      find,
      findBy,
-     findById
+     findById,
+     findByDepartment
 }
 
 function find(){
      return db('users')
-     .select('id', 'username', 'password')
+     .select('id', 'username', 'password', 'department')
 }
 
 //TODO - make sure to include the role information
@@ -28,4 +29,10 @@ function findById(id){
 
 function add(newUser){
      return db('users').insert(newUser).then(([id]) => findById(id))
+}
+
+function findByDepartment(department){
+     return db('users')
+     .where('department','=', department)
+     .select('id', 'username', 'department')
 }
